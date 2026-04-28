@@ -1,0 +1,53 @@
+log:
+  level: DEBUG
+
+entryPoints:
+  web:
+    address: ":8090"
+  traefik:
+    address: ":8091"
+
+api:
+  insecure: true
+  dashboard: true
+
+providers:
+  file:
+    filename: /etc/traefik/traefik.yml
+    watch: true
+
+http:
+  routers:
+    netflix:
+      rule: "Host(`netflix.localhost`)"
+      entryPoints:
+        - web
+      service: netflix
+
+    netflix-frontend:
+      rule: "Host(`netflix-front.localhost`)"
+      entryPoints:
+        - web
+      service: netflix-frontend
+
+    netflix-phpmyadmin:
+      rule: "Host(`phpmyadmin.localhost`)"
+      entryPoints:
+        - web
+      service: netflix-phpmyadmin
+
+  services:
+    netflix:
+      loadBalancer:
+        servers:
+          - url: "http://10.200.1.20:80"
+
+    netflix-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://10.200.1.50:3000"
+
+    netflix-phpmyadmin:
+      loadBalancer:
+        servers:
+          - url: "http://10.200.1.40:80"

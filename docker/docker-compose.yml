@@ -1,0 +1,12 @@
+name: romadevenv
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: romadev-traefik
+    command:
+      - --configFile=/etc/traefik/traefik.yml
+    restart: always
+    volumes:
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: "host"
