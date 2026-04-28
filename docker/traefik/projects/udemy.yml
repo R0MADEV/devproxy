@@ -1,0 +1,35 @@
+http:
+  routers:
+    udemy:
+      rule: "Host(`udemy.localhost`)"
+      entryPoints:
+        - web
+      service: udemy
+
+    udemy-frontend:
+      rule: "Host(`udemy-front.localhost`)"
+      entryPoints:
+        - web
+      service: udemy-frontend
+
+    udemy-phpmyadmin:
+      rule: "Host(`udemy-phpmyadmin.localhost`)"
+      entryPoints:
+        - web
+      service: udemy-phpmyadmin
+
+  services:
+    udemy:
+      loadBalancer:
+        servers:
+          - url: "http://10.200.2.10:8000"
+
+    udemy-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://10.200.2.40:3000"
+
+    udemy-phpmyadmin:
+      loadBalancer:
+        servers:
+          - url: "http://10.200.2.30:80"
