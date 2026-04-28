@@ -13,7 +13,7 @@ api:
 
 providers:
   file:
-    filename: /etc/traefik/traefik.yml
+    directory: /etc/traefik/projects
     watch: true
 
 # ============================================================

@@ -8,5 +8,6 @@ services:
     restart: always
     volumes:
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik/projects:/etc/traefik/projects:ro
       - /var/run/docker.sock:/var/run/docker.sock
     network_mode: "host"
