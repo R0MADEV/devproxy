@@ -1,0 +1,46 @@
+http:
+  routers:
+    oroi:
+      rule: "Host(`oroi.localhost`)"
+      entryPoints:
+        - web
+      service: oroi
+
+    oroi-typesense:
+      rule: "Host(`typesense-oroi.localhost`)"
+      entryPoints:
+        - web
+      service: oroi-typesense
+
+    oroi-typesense-dashboard:
+      rule: "Host(`typesense-oroi-dashboard.localhost`)"
+      entryPoints:
+        - web
+      service: oroi-typesense-dashboard
+
+    oroi-keycloak:
+      rule: "Host(`auth-oroi.localhost`)"
+      entryPoints:
+        - web
+      service: oroi-keycloak
+
+  services:
+    oroi:
+      loadBalancer:
+        servers:
+          - url: "http://10.189.40.10:8000"
+
+    oroi-typesense:
+      loadBalancer:
+        servers:
+          - url: "http://10.189.40.6:8108"
+
+    oroi-typesense-dashboard:
+      loadBalancer:
+        servers:
+          - url: "http://10.189.40.7:80"
+
+    oroi-keycloak:
+      loadBalancer:
+        servers:
+          - url: "http://10.189.40.8:8080"
