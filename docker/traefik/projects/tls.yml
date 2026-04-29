@@ -1,0 +1,6 @@
+tls:
+  certificates:
+    - certFile: "/etc/traefik/certs/oroi/oroi.localhost.crt"
+      keyFile: "/etc/traefik/certs/oroi/oroi.localhost.key"
+    - certFile: "/etc/traefik/certs/oroi/auth-oroi.localhost.crt"
+      keyFile: "/etc/traefik/certs/oroi/auth-oroi.localhost.key"

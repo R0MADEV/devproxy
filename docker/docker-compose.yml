@@ -9,5 +9,6 @@ services:
     volumes:
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
       - ./traefik/projects:/etc/traefik/projects:ro
+      - ./traefik/certs:/etc/traefik/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock
     network_mode: "host"

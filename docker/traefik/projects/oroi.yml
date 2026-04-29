@@ -3,8 +3,16 @@ http:
     oroi:
       rule: "Host(`oroi.localhost`)"
       entryPoints:
-        - web
+        - websecure
       service: oroi
+      tls: {}
+
+    oroi-keycloak:
+      rule: "Host(`auth-oroi.localhost`)"
+      entryPoints:
+        - websecure
+      service: oroi-keycloak
+      tls: {}
 
     oroi-typesense:
       rule: "Host(`typesense-oroi.localhost`)"
@@ -18,17 +26,16 @@ http:
         - web
       service: oroi-typesense-dashboard
 
-    oroi-keycloak:
-      rule: "Host(`auth-oroi.localhost`)"
-      entryPoints:
-        - web
-      service: oroi-keycloak
-
   services:
     oroi:
       loadBalancer:
         servers:
           - url: "http://10.189.40.10:8000"
+
+    oroi-keycloak:
+      loadBalancer:
+        servers:
+          - url: "http://10.189.40.8:8080"
 
     oroi-typesense:
       loadBalancer:
@@ -39,8 +46,3 @@ http:
       loadBalancer:
         servers:
           - url: "http://10.189.40.7:80"
-
-    oroi-keycloak:
-      loadBalancer:
-        servers:
-          - url: "http://10.189.40.8:8080"

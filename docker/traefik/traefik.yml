@@ -4,8 +4,11 @@ log:
 entryPoints:
   web:
     address: ":8090"
+  websecure:
+    address: ":8444"
   traefik:
     address: ":8091"
+
 
 api:
   insecure: true
